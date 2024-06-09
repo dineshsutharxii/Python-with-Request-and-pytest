@@ -1,11 +1,11 @@
+import pytest
 import requests
 import time
 import random
 
 base_url = "https://reqres.in/"
 post_id = 0
-
-
+@pytest.mark.getReuest
 def test_getRequest():
     print(" --- Inside get request ---")
     start_time = time.time()
@@ -21,7 +21,8 @@ def test_getRequest():
     # print(response['data']['id'])
     assert response['data']['id'] == 2
 
-
+@pytest.mark.postRequest
+@pytest.mark.runpostandput
 def test_postrequest():
     global post_id
     print("--- Inside post Request ---")
@@ -43,12 +44,12 @@ def test_postrequest():
     assert response['name'] == Name
     assert response['job'] == Job
 
-
+@pytest.mark.putRequest
+@pytest.mark.runpostandput
 def test_putRequest():
     print("--- Inside Put Request ---")
     with open("id.txt", 'r') as file:
         post_id = file.read()
-    # post_id = 404
     post_header = {
         "Content-Type": 'application/json'
     }
@@ -65,7 +66,7 @@ def test_putRequest():
     assert response['name'] == Name
     assert response['job'] == Job
 
-
+@pytest.mark.deleteReuest
 def test_deleteRequest():
     print("--- Inside Delete Request ---")
     with open("id.txt", 'r') as file:
