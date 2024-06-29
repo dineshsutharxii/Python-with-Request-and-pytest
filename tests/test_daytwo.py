@@ -9,8 +9,8 @@ json_header = {
 }
 
 json_data = {
-    "name": "Dipak__Singh",
-    "email": "dipak__singh@reinger.example",
+    "name": "Dipak__ingh",
+    "email": "dipak__sinh@reinsfsger.example",
     "gender": "male",
     "status": "inactive"
 }

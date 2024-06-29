@@ -50,6 +50,7 @@ def test_putRequest():
     print("--- Inside Put Request ---")
     with open("id.txt", 'r') as file:
         post_id = file.read()
+
     post_header = {
         "Content-Type": 'application/json'
     }
@@ -73,3 +74,29 @@ def test_deleteRequest():
         post_id = file.read()
     response = requests.delete(url=base_url + 'api/users/' + str(post_id))
     assert response.status_code == 204
+
+
+def test_get():
+    get_req = requests.get(url=base_url+'api/users/2')
+    response = get_req.json()
+    assert get_req.status_code == 200
+    assert response['data']['id'] == 2
+    print(response)
+
+def test_post():
+    Name = 'Dipak'+ str(random.random()*100)
+    Job = 'HR' + str(random.random()*100)
+    json_load = {
+        "name": Name,
+        "job": Job
+    }
+    header_load = {
+        "Content-Type": 'application/json'
+    }
+    post_req = requests.post(url=base_url + 'api/users/', headers= header_load, json=json_load)
+    response = post_req.json()
+    assert post_req.status_code == 201
+    with open("id.txt", 'w') as file:
+        file.write(response['id'])
+    assert response['name'] == Name
+    assert response['job'] == Job
