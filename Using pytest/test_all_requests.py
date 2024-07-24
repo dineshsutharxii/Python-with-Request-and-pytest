@@ -4,14 +4,16 @@ import time
 import random
 
 base_url = "https://reqres.in/"
-post_id = 0
+post_id = 1
+
+
 @pytest.mark.getReuest
 def test_getRequest():
     print(" --- Inside get request ---")
     start_time = time.time()
     get_response = requests.get(url=base_url + 'api/users/2')
     end_time = time.time()
-    elapsed_time = end_time-start_time
+    elapsed_time = end_time - start_time
     response = get_response.json()
     print(response)
     print("Using time method : " + str(elapsed_time))
@@ -20,6 +22,7 @@ def test_getRequest():
     assert get_response.status_code == 200
     # print(response['data']['id'])
     assert response['data']['id'] == 2
+
 
 @pytest.mark.postRequest
 @pytest.mark.runpostandput
@@ -44,6 +47,7 @@ def test_postrequest():
     assert response['name'] == Name
     assert response['job'] == Job
 
+
 @pytest.mark.putRequest
 @pytest.mark.runpostandput
 def test_putRequest():
@@ -67,6 +71,7 @@ def test_putRequest():
     assert response['name'] == Name
     assert response['job'] == Job
 
+
 @pytest.mark.deleteReuest
 def test_deleteRequest():
     print("--- Inside Delete Request ---")
@@ -77,15 +82,16 @@ def test_deleteRequest():
 
 
 def test_get():
-    get_req = requests.get(url=base_url+'api/users/2')
+    get_req = requests.get(url=base_url + 'api/users/2')
     response = get_req.json()
     assert get_req.status_code == 200
     assert response['data']['id'] == 2
     print(response)
 
+
 def test_post():
-    Name = 'Dipak'+ str(random.random()*100)
-    Job = 'HR' + str(random.random()*100)
+    Name = 'Dipak' + str(random.random() * 100)
+    Job = 'HR' + str(random.random() * 100)
     json_load = {
         "name": Name,
         "job": Job
@@ -93,7 +99,7 @@ def test_post():
     header_load = {
         "Content-Type": 'application/json'
     }
-    post_req = requests.post(url=base_url + 'api/users/', headers= header_load, json=json_load)
+    post_req = requests.post(url=base_url + 'api/users/', headers=header_load, json=json_load)
     response = post_req.json()
     assert post_req.status_code == 201
     with open("id.txt", 'w') as file:
