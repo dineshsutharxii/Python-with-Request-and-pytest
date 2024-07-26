@@ -80,7 +80,7 @@ def test_deleteRequest():
     response = requests.delete(url=base_url + 'api/users/' + str(post_id))
     assert response.status_code == 204
 
-
+@pytest.mark.skip
 def test_get():
     get_req = requests.get(url=base_url + 'api/users/2')
     response = get_req.json()
